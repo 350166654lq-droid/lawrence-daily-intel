@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f3efe4" />
+    <meta name="description" content="面向临床研发与医学监查的每日 AI、癫痫和脑卒中个人情报简报。" />
+    <title>Clinical Signal Desk · 每日临床情报</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,500;6..72,650&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="masthead">
+      <a class="brand" href="#top" aria-label="回到今日简报">
+        <span class="brand-mark">CS</span>
+        <span>
+          <strong>Clinical Signal Desk</strong>
+          <small>LAWRENCE'S DAILY INTELLIGENCE</small>
+        </span>
+      </a>
+      <div class="masthead-meta">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span>云端每日更新</span>
+        <span class="separator">/</span>
+        <span>Asia · Shanghai</span>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-kicker">
+          <span id="edition-label">MORNING EDITION</span>
+          <span class="rule"></span>
+          <span id="digest-date">载入中</span>
+        </div>
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">从噪音里筛出会改变判断的信号</p>
+            <h1 id="page-title">每日临床<br /><em>情报切片</em></h1>
+          </div>
+          <div class="hero-note">
+            <p id="editor-note">正在读取今日简报……</p>
+            <div class="principles">
+              <span>近 24–48h 优先</span>
+              <span>Patient-level first</span>
+              <span>历史全库去重</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="control-deck" aria-label="简报工具">
+        <div class="stat">
+          <span class="stat-label">今日入选</span>
+          <strong id="item-count">—</strong>
+          <span>条新信号</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">候选池</span>
+          <strong id="candidate-count">—</strong>
+          <span>条已扫描</span>
+        </div>
+        <div class="stat wide">
+          <span class="stat-label">最后生成</span>
+          <strong id="generated-time">—</strong>
+          <span id="provider-label">等待首次运行</span>
+        </div>
+        <label class="search-box">
+          <span>检索今日内容</span>
+          <input id="search-input" type="search" placeholder="药物、终点、安全性……" autocomplete="off" />
+        </label>
+      </section>
+
+      <nav class="lane-tabs" aria-label="内容分类">
+        <button class="lane-tab active" data-filter="all" type="button">全部</button>
+        <button class="lane-tab" data-filter="ai_clinical" type="button">AI × 临床</button>
+        <button class="lane-tab" data-filter="neuro" type="button">癫痫 / 脑卒中</button>
+      </nav>
+
+      <div class="content-grid">
+        <div class="briefing" id="briefing" aria-live="polite">
+          <section class="lane-section" data-lane-section="ai_clinical">
+            <div class="section-heading">
+              <span class="section-index">01</span>
+              <div>
+                <p>CLINICAL INTELLIGENCE</p>
+                <h2>AI × 临床医学</h2>
+              </div>
+              <span class="section-count" id="ai-count">0</span>
+            </div>
+            <div class="cards" id="ai-cards"></div>
+          </section>
+
+          <section class="lane-section" data-lane-section="neuro">
+            <div class="section-heading">
+              <span class="section-index">02</span>
+              <div>
+                <p>NEURO CLINICAL SIGNALS</p>
+                <h2>癫痫 / 脑卒中</h2>
+              </div>
+              <span class="section-count" id="neuro-count">0</span>
+            </div>
+            <div class="cards" id="neuro-cards"></div>
+          </section>
+
+          <div class="empty-state" id="empty-state" hidden>
+            <span>NO FALSE SIGNALS</span>
+            <h2>今日没有符合标准的新内容</h2>
+            <p>系统不会用旧闻或低相关信息补齐数量。你可以切换历史日期，或稍后手动重新运行。</p>
+          </div>
+        </div>
+
+        <aside class="archive-panel" aria-label="历史简报">
+          <div class="archive-sticky">
+            <div class="archive-title">
+              <p>ARCHIVE</p>
+              <h2>往期简报</h2>
+            </div>
+            <div id="archive-list" class="archive-list"></div>
+            <div class="method-note">
+              <span class="method-number">3×</span>
+              <p><strong>三层去重</strong><br />URL / DOI / PMID 精确匹配<br />标题指纹相似度<br />事件级语义核查</p>
+            </div>
+            <a class="github-link" href="https://github.com/350166654lq-droid/lawrence-daily-intel/actions" target="_blank" rel="noreferrer">
+              查看云端运行状态 <span>↗</span>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer>
+      <p>只收录公开来源 · 不写入患者数据 · 每条保留原始链接</p>
+      <p>Clinical Signal Desk / Shanghai</p>
+    </footer>
+
+    <template id="card-template">
+      <article class="signal-card">
+        <div class="card-rail">
+          <span class="card-number"></span>
+          <span class="topic-badge"></span>
+        </div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="source-type"></span>
+            <span class="published-at"></span>
+            <span class="confidence"></span>
+          </div>
+          <h3 class="card-title"></h3>
+          <p class="fact"></p>
+          <div class="why-box">
+            <span>WHY IT MATTERS</span>
+            <p class="why"></p>
+          </div>
+          <details>
+            <summary>展开 CRP / MM 深度解读 <span>＋</span></summary>
+            <div class="deep-read">
+              <div>
+                <h4>证据与局限</h4>
+                <p class="interpretation"></p>
+              </div>
+              <div>
+                <h4>临床研发落点</h4>
+                <p class="implication"></p>
+              </div>
+              <div class="update-row" hidden>
+                <h4>较上次新增</h4>
+                <p class="update-note"></p>
+              </div>
+            </div>
+          </details>
+          <div class="card-footer">
+            <span class="evidence-grade"></span>
+            <a class="source-link" target="_blank" rel="noreferrer">查看原始来源 <span>↗</span></a>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

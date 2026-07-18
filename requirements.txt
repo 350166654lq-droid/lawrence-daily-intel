@@ -1,0 +1,5 @@
+ddgs==9.6.1
+feedparser==6.0.11
+openai>=2.20.0,<3
+python-dateutil==2.9.0.post0
+requests==2.32.4

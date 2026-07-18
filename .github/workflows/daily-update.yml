@@ -1,0 +1,87 @@
+name: Daily Clinical Intelligence
+
+on:
+  schedule:
+    # 06:45 Asia/Shanghai. Starts early so the published brief is normally ready by 07:00.
+    - cron: "45 22 * * *"
+  workflow_dispatch:
+    inputs:
+      refresh:
+        description: "Collect a new digest before deploying"
+        required: true
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  models: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily-clinical-intelligence
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out the intelligence archive
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install collectors
+        run: pip install -r requirements.txt
+
+      - name: Verify deduplication rules
+        run: python -m unittest discover -s tests -v
+
+      - name: Collect, interpret, and deduplicate today's signals
+        if: ${{ github.event_name == 'schedule' || inputs.refresh }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_MODEL: openai/gpt-4.1
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-5.6-terra
+        run: python scripts/update_digest.py
+
+      - name: Commit the new digest and historical index
+        if: ${{ github.event_name == 'schedule' || inputs.refresh }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/data
+          if git diff --cached --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "Update daily clinical intelligence"
+            git push
+          fi
+
+      - name: Prepare GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload the site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

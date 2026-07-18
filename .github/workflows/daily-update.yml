@@ -11,6 +11,11 @@ on:
         required: true
         type: boolean
         default: true
+      dry_run:
+        description: "Exercise collectors and GPT without changing the published digest"
+        required: true
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -51,10 +56,10 @@ jobs:
           GITHUB_MODEL: openai/gpt-4.1
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: gpt-5.6-terra
-        run: python scripts/update_digest.py
+        run: python scripts/update_digest.py ${{ inputs.dry_run && '--dry-run' || '' }}
 
       - name: Commit the new digest and historical index
-        if: ${{ github.event_name == 'schedule' || inputs.refresh }}
+        if: ${{ (github.event_name == 'schedule' || inputs.refresh) && !inputs.dry_run }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

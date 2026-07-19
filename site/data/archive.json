@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-19T07:36:59+08:00",
+  "updated_at": "2026-07-20T07:41:08+08:00",
   "items": [
     {
       "clinical_research_implication": "现阶段更适合候选分子早期风险排序和BD尽调中的补充证据，不能直接用于受试者入排、患者肝损伤判定或药物警戒因果评价。",
@@ -176,6 +176,28 @@
       "canonical_url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOZ21Kb05EZ1pyQ1RxUURPRk1ZaGZBcTVhMnJVUEVpeGxOM0RBY1hqMVhZa2oyNkRkbzBlRTdyc1pkaWlWR084VVRXU21MRVloOVFCanltc2R5SkVaU3E1ejgyVlNUVEpsalUycWg2bmFLRk5MRDNPLTgtVEQwcXliejduR0FweUVZVnMtLUI3MDNCaXNBemhkZzJpVUkydjlvaEJPQU1LUQ?oc=5",
       "digest_date": "2026-07-19",
       "id": "c5f04941b9ef645b"
+    },
+    {
+      "clinical_research_implication": "该框架强调小队列AI模型需结合合成数据与临床治理，适用于罕见病患者层面数据管理、入排标准制定、终点解释及protocol/MMP设计，尤其在罕见肿瘤临床试验中可提升数据质量与伦理合规性。",
+      "confidence": "中",
+      "event_key": "ai-rare-breast-cancer-framework-2026q3",
+      "evidence_grade": "同行评议研究",
+      "fact": "2026-07-19，《Discov Oncol》发表观点性论文，提出针对罕见乳腺癌的AI应用证据框架，结合小队列验证、合成数据实践与临床治理，强调罕见肿瘤AI模型需基于真实世界数据与伦理监管。",
+      "interpretation": "该文为同行评议观点，未报告具体模型性能或临床终点结果，但提出罕见病AI模型开发需严格临床治理与数据合成实践。证据局限在于缺乏大规模患者验证及实际临床试验数据。",
+      "is_substantive_update": false,
+      "lane": "ai_clinical",
+      "original_title": "An evidence informed framework for artificial intelligence in rare breast cancers using small cohort validation synthetic data practices and clinical governance.",
+      "published_at": "2026-07-19",
+      "source_name": "Discov Oncol",
+      "source_type": "pubmed",
+      "source_url": "https://pubmed.ncbi.nlm.nih.gov/42472394",
+      "title_zh": "罕见乳腺癌AI应用证据框架：小队列验证、合成数据与临床治理",
+      "topic": "AI×临床",
+      "update_note": "",
+      "why_it_matters": "罕见肿瘤临床研究常受样本量与数据异质性限制，该框架为AI模型在罕见病临床试验、患者层面数据管理及protocol设计提供参考，直接关联CRP/MM工作中罕见病AI应用的合规性与数据质量。",
+      "canonical_url": "https://pubmed.ncbi.nlm.nih.gov/42472394",
+      "digest_date": "2026-07-20",
+      "id": "6c6d178bfceb0abb"
     }
   ]
 }
